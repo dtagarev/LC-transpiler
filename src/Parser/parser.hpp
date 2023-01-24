@@ -2,14 +2,18 @@
 #define PARSER
 
 #include <vector> 
-#include <optional>
+#include <stack>
+#include <string>
 #include "../Lexer/lexer.hpp"
+#include "../ASTclasses/structure.hpp"
 #include "../ASTclasses/statement.hpp"
+#include "../ASTclasses/function-declaration.hpp"
 
 
 class Parser {
 public:
 	using tokenArray = Lexer::tokenArray;
+	using structureArray = Structure::structureArray;
 	using statementArray = Statement::statementArray;
 
 private:
@@ -17,9 +21,18 @@ private:
 	tokenArray::iterator  currToken;
 	tokenArray::iterator endToken;
 	
-	std::optional<Structure>& expectFunction(tokenArray::iterator& currToken);
+	Statement parseFuncCall(tokenArray::iterator& currToken);
+	Statement parseVariable(tokenArray::iterator& currToken);
+	Statement parseOperator(tokenArray::iterator& currToken);
+	Statement parseStrLiteral(tokenArray::iterator& currToken);
+	Statement parseNumLiteral(tokenArray::iterator& currToken);
+	Statement parseTable(tokenArray::iterator& currToken);
+	
+	Structure* expectFunction(tokenArray::iterator& currToken);
+	statementArray expectParameters(tokenArray::iterator& currToken);
 public:
-	void parse(tokenArray& tokens);
+	structureArray parse(tokenArray& tokens);
+	void deleteAST();
 private:
 
 };

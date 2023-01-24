@@ -5,7 +5,7 @@
 
 class Structure {
 public:
-	using structureArray = std::vector<Structure>;
+	using structureArray = std::vector<Structure*>;
 	virtual ~Structure() = default;
 	
 	virtual void debugPrint() = 0;

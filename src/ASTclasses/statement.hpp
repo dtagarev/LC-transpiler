@@ -22,6 +22,8 @@ struct Statement : Structure {
 	enum Type statementType { VOID };
 	std::string text;
 	statementArray parameters;	
+
+	void debugPrint() override;
 };
 
 #endif

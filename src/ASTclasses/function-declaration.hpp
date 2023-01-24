@@ -16,6 +16,7 @@ struct FunctionDeclaration : Structure {
 
 	enum Type statementType { VOID };
 	bool local = false;
+	void debugPrint() override;
 };
 
 #endif
