@@ -2,21 +2,21 @@
 #define FUNCTION_DECLARATION
 
 #include <string>
-#include "statement.hpp"
+#include <vector>
 #include "types.h"
 #include "structure.hpp"
 
 struct FunctionDeclaration : Structure {
-	using statementArray = Statement::statementArray;
 	using structureArray = Structure::structureArray;
 	
+	enum Type returnType { NULLTYPE };
 	std::string name;
-	statementArray parameters;	
+	std::vector<structureArray> parameters;	
 	structureArray body;
 
-	enum Type statementType { VOID };
+	enum Type functionType { VOID };
 	bool local = false;
-	void debugPrint() override;
+	/* void debugPrint() override; */
 };
 
 #endif

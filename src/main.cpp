@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "Lexer/lexer.hpp"
+#include "Parser/parser.hpp"
 
 int main ()
 {
@@ -14,10 +15,13 @@ int main ()
 	/* std::cout << fileContents << std::endl <<std:: endl; */
 	std::cout << "-----------------------------------" << std::endl << std::endl;
     Lexer lx;
+	Parser ps;
 	std::vector<Token> tokens = lx.parse(fileContents);	
-	
+	/* ps.parse(tokens); */
     for(Token currToken : tokens) {
         currToken.debugPrint();
     }
 
 }
+
+//todo - parseParamater function 

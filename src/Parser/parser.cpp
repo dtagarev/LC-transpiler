@@ -3,134 +3,116 @@
 
 using tokenArray = Parser::tokenArray;
 using structureArray = Parser::structureArray;
-using statementArray = Parser::statementArray;
 
 structureArray Parser::parse(tokenArray& tokens) {
 	currToken = tokens.begin();
 	endToken =tokens.end();
+	structureArray res;
 	
 	while ( currToken != endToken ) {
-	
 		if(currToken->type == FUNCTION) {
-			if(!expectFunction(currToken)) {
-				throw std::runtime_error("Invalid function declaration");
-			}
+			Structure* curr = expectFunctionDeclaration(currToken);
+			res.push_back(curr);
 		}
-	/* 	if(currToken->type == IDENTIFIER){ */ 
-	/* 		if(expectVariableDeclaration()) { */
-	/* 		} else if (expectFunctionCall()) { */
-	/* 		} else { */
-	/* 			throw std::runtime_error("Invalid Identifier "); */ 
-	/* 		} */
-			
-		/* 	if(expectExpression()) */
-		/* 		continue; */
-
-		/* 	throw std::runtime_error("Unhandled identifier on line "); */
-		/* } */
-		/* if(currToken->type == FUNCTION) { */
-		/* 	expectFunction(currToken); */
-		/* } */
-	
-	}
-	return std::vector<Structure*>();
-}
-Structure* Parser::expectFunction(tokenArray::iterator& currToken) {
-	FunctionDeclaration* func = new FunctionDeclaration();
-	currToken++;
-	if(currToken->type == IDENTIFIER) {
-		func->name = currToken->text;
 		currToken++;
 	}
-	else {
-		delete func;
-		return nullptr;
-	}
-	/* while(currToken->type != L_PARENT) */
-	/* 	currToken++; */
-	func->parameters = expectParameters(currToken);
+	return res;
+}
 
+Structure* Parser::expectFunctionDeclaration(tokenArray::iterator& currToken) {
+	if(currToken->type == FUNCTION)
+		currToken++;
+	FunctionDeclaration* newFunc = new FunctionDeclaration();
+	newFunc->name = currToken->text;
+	currToken++;
+	if(currToken->type != L_PARENT)
+		throw std::runtime_error("Invalid function parameter declaration");
+	
+	newFunc->parameters = parseParameters(currToken);
+	newFunc->body = parseBody(currToken);
+	newFunc->returnType = determineFunctionReturnType(newFunc->body);
+	return newFunc;
+}
+Structure* Parser::expectFunctionCall(tokenArray::iterator& currToken) {
 	return nullptr;
 }
-statementArray Parser::expectParameters(tokenArray::iterator& currToken) {
-	statementArray arr;
-	std::stack<char> bracketCheck;
-	bracketCheck.push('(');
+Structure* Parser::expectVariableDeclaration(tokenArray::iterator& currToken) {
+	return nullptr;
+}
+Structure* Parser::expectVariableCall(tokenArray::iterator& currToken) {
+	return nullptr;
+}
+Structure* Parser::expectElem(tokenArray::iterator& currToken) {
+	return nullptr;
+}
+Structure* Parser::expectTable(tokenArray::iterator& currToken) {
+	return nullptr;
+}
+Structure* Parser::expectReturn(tokenArray::iterator& currToken) {
+	return nullptr;
+}
 
-	while(!bracketCheck.empty()) {
-		if(currToken->type == COMMA)
-			continue;
-		
-		if(currToken->type == L_PARENT ||currToken->type == L_BRACKET ||currToken->type == L_BRACE) {
-			bracketCheck.push('(');
-		}
-		if(currToken->type == R_PARENT ||currToken->type == R_BRACKET ||currToken->type == R_BRACE) {
-			bracketCheck.pop();
-		}
-		
-		Statement tmp;
-		if(currToken->type == STRING_LITERAL) {
-			tmp.kind = STR_LITERAL;
-			tmp.text = currToken->text;
-			arr.push_back(tmp);
-		} else if(currToken->type == NUMBER_LITERAL ) {
-			tmp.kind = NUM_LITERAL;
-			tmp.text = currToken->text;
-			arr.push_back(tmp);
-		} else if(currToken->type == IDENTIFIER) {
-			tmp.kind = VARIABLE_NAME;
-			tmp.text = currToken->text;
-			arr.push_back(tmp);
-		} else if (
-				currToken->type == PLUS ||
-				currToken->type == L_PARENT ||
-				currToken->type == R_PARENT ||
-				currToken->type == L_BRACE ||
-				currToken->type == R_BRACE ||
-				currToken->type == L_BRACKET ||
-				currToken->type == R_BRACKET ||
-				currToken->type == PLUS ||
-				currToken->type == MINUS ||
-				currToken->type == STAR ||
-				currToken->type == PERCENT ||
-				currToken->type == EXP ||
-				currToken->type == SH ||
-				currToken->type == ASSIGN ||
-				currToken->type == EQUAL ||
-				currToken->type == LESS_OR_EQUAL ||
-				currToken->type == GREATER_OR_EQUAL ||
-				currToken->type == NOT_EQUAL ||
-				currToken->type == LESS_THAN ||
-				currToken->type == DOUBLE_LESS_THAN ||
-				currToken->type == GREATER_THAN ||
-				currToken->type == DOUBLE_GREATER_THAN ||
-				currToken->type == SLASH ||
-				currToken->type == DOUBLE_SLASH ||
-				currToken->type == TILDE ||
-				currToken->type == COLON ||
-				currToken->type == DOUBLE_COLON ||
-				currToken->type == SEMI_COLON ||
-				currToken->type == DOT ||
-				currToken->type == DOUBLE_DOT ||
-				currToken->type == ELLIPSIS ||
-				currToken->type == AMPERSAND ||
-				currToken->type == PIPE ) {
-
-			tmp.kind = OPERATOR_CALL;
-			tmp.text = currToken->text;
-			arr.push_back(tmp);
-		}
-		currToken++;
+Structure* Parser::parseID(tokenArray::iterator& currToken) {
+	std::string name = currToken->text;
+	currToken++;
+	if(currToken->type == L_PARENT) { //functionCall
+		currToken--;
+		return expectFunctionCall(currToken);
+	} else if(currToken->type == L_BRACKET) { //table
+		currToken--;
+		return expectTable(currToken);
+	} else if(currToken->type == ASSIGN) { //variable declaration
+		currToken--;
+		return expectVariableDeclaration(currToken);
+	} else { //variable
+		currToken--;
+		return expectVariableCall(currToken);
 	}
-	return arr;
+	throw std::runtime_error("Unknown identifier");
+	//keywords?
 }
-	
-Statement Parser::parseFuncCall(tokenArray::iterator& currToken) {
-	Statement tmp;
-	tmp.
+
+bool Parser::isOperator(tokenArray::iterator& currToken) {
+
+	if (
+		currToken->type == PLUS ||
+		currToken->type == L_PARENT ||
+		currToken->type == R_PARENT ||
+		currToken->type == L_BRACE ||
+		currToken->type == R_BRACE ||
+		currToken->type == L_BRACKET ||
+		currToken->type == R_BRACKET ||
+		currToken->type == PLUS ||
+		currToken->type == MINUS ||
+		currToken->type == STAR ||
+		currToken->type == PERCENT ||
+		currToken->type == EXP ||
+		currToken->type == SH ||
+		currToken->type == ASSIGN ||
+		currToken->type == EQUAL ||
+		currToken->type == LESS_OR_EQUAL ||
+		currToken->type == GREATER_OR_EQUAL ||
+		currToken->type == NOT_EQUAL ||
+		currToken->type == LESS_THAN ||
+		currToken->type == DOUBLE_LESS_THAN ||
+		currToken->type == GREATER_THAN ||
+		currToken->type == DOUBLE_GREATER_THAN ||
+		currToken->type == SLASH ||
+		currToken->type == DOUBLE_SLASH ||
+		currToken->type == TILDE ||
+		currToken->type == COLON ||
+		currToken->type == DOUBLE_COLON ||
+		currToken->type == SEMI_COLON ||
+		currToken->type == DOT ||
+		currToken->type == DOUBLE_DOT ||
+		currToken->type == ELLIPSIS ||
+		currToken->type == AMPERSAND ||
+		currToken->type == AND ||
+		currToken->type == OR ||
+		currToken->type == PIPE ) 
+	{
+		return true;
+	}
+	return false;
 }
-Statement Parser::parseVariable(tokenArray::iterator& currToken);
-Statement Parser::parseOperator(tokenArray::iterator& currToken);
-Statement Parser::parseStrLiteral(tokenArray::iterator& currToken);
-Statement Parser::parseNumLiteral(tokenArray::iterator& currToken);
-Statement Parser::parseTable(tokenArray::iterator& currToken);
+

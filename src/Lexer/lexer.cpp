@@ -329,7 +329,7 @@ void Lexer::endToken(Token& token, tokenArray& arr) {
 	if(token.type == IDENTIFIER) {
 		reservedWordCheck(token);	
 	}
-	if(token.type != NULLTOKEN && token.type != WHITESPACE) {
+	if(token.type != NULLTOKEN && token.type != WHITESPACE && token.type != SEMI_COLON) {
 		arr.push_back(token);
 	}
 	token.type = NULLTOKEN;
