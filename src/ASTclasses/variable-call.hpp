@@ -1,16 +1,19 @@
-#ifndef VARIABLE
-#define VARIABLE
+#ifndef VARIABLE_CALL_FILE
+#define VARIABLE_CALL_FILE
 
+#include <iostream>
 #include <string>
 #include "structure.hpp"
 #include "types.h"
 
-struct Variable : Structure {
+struct VariableCall : Structure {
 	using structureArray = Structure::structureArray;
 	
 	enum Type returnType { NULLTYPE };
 	std::string name;
-	structureArray declaration;
+	
+	void debugPrint(std::size_t indent) override;
+	VariableCall();
 };
 
 #endif

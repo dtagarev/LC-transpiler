@@ -1,21 +1,21 @@
-#ifndef FUNC_CALL_FILE
-#define FUNC_CALL_FILE
+#ifndef IF_FILE
+#define IF_FILE
 
 #include <iostream>
-#include <vector>
 #include <string>
 #include "structure.hpp"
 #include "types.h"
 
-struct FuncCall : Structure {
+struct If : Structure {
 	using structureArray = Structure::structureArray;
 	
-	enum Type returnType { NULLTYPE };
-	std::string name;
 	std::vector<structureArray> parameters;
+	structureArray body;
+	structureArray elseBody;
 
 	void debugPrint(std::size_t indent) override;
-	FuncCall();
+	If();
 };
 
 #endif
+

@@ -16,12 +16,15 @@ int main ()
 	std::cout << "-----------------------------------" << std::endl << std::endl;
     Lexer lx;
 	Parser ps;
+	/* std::string testfile1 = "function fact (n) if n == 0 then  return 1  else  return n * fact(n-1.5)  end end local a = 1 local b = a*2 print(fact(b + 3))"; */
 	std::vector<Token> tokens = lx.parse(fileContents);	
-	/* ps.parse(tokens); */
-    for(Token currToken : tokens) {
-        currToken.debugPrint();
-    }
+	auto ast = ps.parse(tokens);
+	
+	ps.debugPrint(ast);
+    /* for(Token currToken : tokens) { */
+    /*     currToken.debugPrint(); */
+    /* } */
 
 }
 
-//todo - parseParamater function 
+//todo - create if-else construction, parse variable declaration ( need to determine functionCall returnType)

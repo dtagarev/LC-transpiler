@@ -1,15 +1,19 @@
-#ifndef STRUCTURE
-#define STRUCTURE
+#ifndef STRUCTURE_FILE
+#define STRUCTURE_FILE
 
 #include <vector>
+#include <iostream>
 
 enum StructureType {
-	UNKNOWN,
-	ELEMENT,
-	VARIABLE,
+	UNKNOWN, 
+	VARIABLE_DECL,
+	VARIABLE_CALL,
 	FUNC_DECL,
 	FUNC_CALL,
 	RETURN_CALL,
+	TABLE_DECL, //to-do
+	ELEMENT, 
+	IF_SCTRUCT
 };
 
 class Structure {
@@ -18,8 +22,9 @@ public:
 	
 	enum StructureType structureType { UNKNOWN };	
 	
+	Structure(StructureType type) : structureType(type) {}
 	virtual ~Structure() = default;
-	/* virtual void debugPrint() = 0; */
+	virtual void debugPrint(std::size_t indent) = 0;
 };
 
 #endif

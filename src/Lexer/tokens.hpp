@@ -1,5 +1,5 @@
-#ifndef TOKENS
-#define TOKENS
+#ifndef TOKENS_FILE
+#define TOKENS_FILE
 
 #include <string>
 #include <iostream>

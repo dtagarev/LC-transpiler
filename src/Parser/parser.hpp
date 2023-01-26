@@ -1,12 +1,18 @@
-#ifndef PARSER
-#define PARSER
+#ifndef PARSER_FILE
+#define PARSER_FILE
 
 #include <vector> 
 #include <string>
+#include <algorithm>
 #include <unordered_map>
 #include "../Lexer/lexer.hpp"
 #include "../ASTclasses/structure.hpp"
 #include "../ASTclasses/function-declaration.hpp"
+#include "../ASTclasses/function-call.hpp"
+#include "../ASTclasses/variable-declaration.hpp"
+#include "../ASTclasses/variable-call.hpp"
+#include "../ASTclasses/return.hpp"
+#include "../ASTclasses/element.hpp"
 #include "../ASTclasses/types.h"
 
 
@@ -31,15 +37,17 @@ private:
 	
 	Structure* parseID(tokenArray::iterator& currToken);
 	std::vector<structureArray> parseParameters(tokenArray::iterator& currToken);
-	structureArray parseBody(tokenArray::iterator& currToken);
+	structureArray parseBody(tokenArray::iterator& currToken, std::vector<enum TokenType>);
+	//void parseDeclaration();
 	
 	enum Type determineFunctionReturnType(structureArray body);
 	bool isOperator(tokenArray::iterator& currToken);
-	bool isLiteral();
-	
+	bool isLiteral(tokenArray::iterator& currToken);
+	bool isEndBodyToken(tokenArray::iterator& currToken, std::vector<enum TokenType>);
 public:
 	structureArray parse(tokenArray& tokens);
 	void deleteAST(structureArray ast);
+	void debugPrint(structureArray);
 };
 
 #endif

@@ -1,6 +1,7 @@
-#ifndef FUNCTION_DECLARATION
-#define FUNCTION_DECLARATION
+#ifndef FUNCTION_DECLARATION_FILE
+#define FUNCTION_DECLARATION_FILE
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include "types.h"
@@ -16,7 +17,10 @@ struct FunctionDeclaration : Structure {
 
 	enum Type functionType { VOID };
 	bool local = false;
-	/* void debugPrint() override; */
+	void debugPrint(std::size_t indent) override;
+
+	FunctionDeclaration();
 };
+
 
 #endif

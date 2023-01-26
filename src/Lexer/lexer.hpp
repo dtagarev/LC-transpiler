@@ -1,5 +1,5 @@
-#ifndef LEXER
-#define LEXER
+#ifndef LEXER_FILE
+#define LEXER_FILE
 #include <vector>
 #include <string>
 #include "tokens.hpp"

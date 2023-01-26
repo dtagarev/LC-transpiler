@@ -1,5 +1,5 @@
-#ifndef TYPES
-#define TYPES
+#ifndef TYPES_FILE
+#define TYPES_FILE
 
 enum Type {
 	NULLTYPE,
