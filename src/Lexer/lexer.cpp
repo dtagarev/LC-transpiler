@@ -41,21 +41,15 @@ tokenArray Lexer::parse(const std::string& program) {
 			case '8':
 			case '9':
 			case '0':
-				if(currToken.type != STRING_LITERAL) {
-					if(currToken.type != NUMBER_LITERAL) {
-						endToken(currToken, tokens);
-					}
-					currToken.type = NUMBER_LITERAL;
-					currToken.text.append(1, currCh);
+				if(currToken.type != STRING_LITERAL && currToken.type != IDENTIFIER) {
+						if(currToken.type != NUMBER_LITERAL) {
+							endToken(currToken, tokens);
+						}
+						currToken.type = NUMBER_LITERAL;
+						currToken.text.append(1, currCh);
 				} else { 
 					currToken.text.append(1, currCh);
 				}
-				/* if(currToken.type == NULLTOKEN) { */
-				/* 	currToken.type = NUMBER_LITERAL; */
-				/* 	currToken.text.append(1, currCh); */
-				/* } else { */
-				/* 	currToken.text.append(1, currCh); */
-				/* } */
 				break;
 			case '(':
 				if(currToken.type != STRING_LITERAL) {
@@ -322,7 +316,10 @@ tokenArray Lexer::parse(const std::string& program) {
 				break;
 		}
 	}
-	
+
+	Token endToken; 
+	endToken.type = EOF_TOKEN;
+	tokens.push_back(endToken);
 	return tokens;
 }
 void Lexer::endToken(Token& token, tokenArray& arr) {
@@ -380,7 +377,7 @@ void Lexer::reservedWordCheck(Token& token) {
 		token.type = UNTIL;
 	} else if(token.text == "while") {
 		token.type = WHILE;
-	} else if(token.text == "print") {
-		token.type = PRINT;
+	/* } else if(token.text == "print") { */
+	/* 	token.type = PRINT; */
 	}
 }

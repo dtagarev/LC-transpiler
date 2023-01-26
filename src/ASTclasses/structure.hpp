@@ -21,6 +21,7 @@ public:
 	using structureArray = std::vector<Structure*>;
 	
 	enum StructureType structureType { UNKNOWN };	
+	bool locality = false;
 	
 	Structure(StructureType type) : structureType(type) {}
 	virtual ~Structure() = default;

@@ -9,7 +9,7 @@ enum TokenType {
 	WHITESPACE, // just a space
 	NUMBER_LITERAL,
 	STRING_LITERAL,
-	STRING_ESCAPE_SEQUENCE,
+	STRING_ESCAPE_SEQUENCE, //5
 	//Operators
 	L_PARENT, // (
 	R_PARENT, // )
@@ -22,7 +22,7 @@ enum TokenType {
 	STAR, // * 
 	PERCENT, // %
 	EXP, // ^ 
-	SH, //#
+	SH, //# //17
 	//multicharacter operators
 	ASSIGN, // =
 	EQUAL, // ==
@@ -44,7 +44,7 @@ enum TokenType {
 	DOUBLE_DOT, // ..
 	ELLIPSIS, // ...
 	AMPERSAND, // &
-	PIPE, // | 
+	PIPE, // | //38
 	//keywords
 	IDENTIFIER, 
 	AND,
@@ -70,9 +70,10 @@ enum TokenType {
 	UNTIL,
 	WHILE,
 	//base library tokens
-	PRINT,
 	//more on the site
 	//comments?
+	PRINT, 
+	EOF_TOKEN, //62
 };
 
 static const char *printToken[] {

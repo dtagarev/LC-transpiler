@@ -5,5 +5,8 @@ function fact (n)
     return n * fact(n-1.5)
   end
 end
-local a = 1 local b = a*2
-	print(fact(b + 3))
+
+
+local a = 1
+local b = a*2
+print(fact(b + 3))
