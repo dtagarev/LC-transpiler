@@ -15,6 +15,7 @@
 #include "../ASTclasses/return.hpp"
 #include "../ASTclasses/element.hpp"
 #include "../ASTclasses/if.hpp"
+#include "../ASTclasses/while.hpp"
 #include "../ASTclasses/types.h"
 
 
@@ -34,6 +35,7 @@ private:
 	Structure* expectVariableCall(tokenArray::iterator& currToken);
 	Structure* expectElem(tokenArray::iterator& currToken);
 	Structure* expectIf(tokenArray::iterator& currToken);
+	Structure* expectWhile(tokenArray::iterator& currToken);
 	//to-be continued...
 	Structure* expectTable(tokenArray::iterator& currToken);
 	Structure* expectReturn(tokenArray::iterator& currToken);

@@ -29,5 +29,3 @@ int main ()
     /* } */
 	ps.deleteAST(ast);
 }
-
-//todo - create if-else construction, parse variable declaration ( need to determine functionCall returnType)

@@ -13,7 +13,8 @@ enum StructureType {
 	RETURN_CALL,
 	TABLE_DECL, //to-do
 	ELEMENT, 
-	IF_SCTRUCT
+	IF_SCTRUCT,
+	WHILE_STRUCT,
 };
 
 class Structure {

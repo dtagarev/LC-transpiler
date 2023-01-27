@@ -29,10 +29,10 @@ structureArray Parser::parse(tokenArray& tokens) {
 			Structure* curr = expectIf(currToken); //currToken moved inide function
 			curr->locality = true;
 			res.push_back(curr); 
-		/* } else if (currToken->type ==  WHILE){ */
-		/* 	Structure* curr = expectWhile(currToken); //currToken moved inide function */
-		/* 	curr->locality = true; */
-		/* 	res.push_back(curr); */ 
+		} else if (currToken->type ==  WHILE){
+			Structure* curr = expectWhile(currToken); //currToken moved inide function
+			curr->locality = true;
+			res.push_back(curr); 
 		}else {
 			std::cout << currToken->text << std::endl;
 			throw std::runtime_error("Unhandled element inside program's body");
@@ -119,6 +119,18 @@ Structure* Parser::expectIf(tokenArray::iterator& currToken) {
 		newIf ->elseBody = parseBody(currToken, endBody);
 	}
 	return newIf;
+}
+
+Structure* Parser::expectWhile(tokenArray::iterator& currToken) {
+	While* newWhile = new While();
+	std::vector<enum TokenType> endParam;
+	endParam.push_back(DO);
+	currToken++; //skips the while token
+	newWhile->parameters = parseParameters(currToken, endParam);
+	std::vector<enum TokenType> endBody;
+	endBody.push_back(END);
+	newWhile->body = parseBody(currToken, endBody);
+	return newWhile;
 }
 Structure* Parser::expectTable(tokenArray::iterator& currToken) {
 	return nullptr;

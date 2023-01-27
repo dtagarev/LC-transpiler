@@ -10,7 +10,10 @@ function fact (n)
     return n * fact(n-1.5)
   end
 end
-var2 = 34;
+local var2 = 34;
+while var2 == 1 do
+	print(var2);
+end
 local a = 1 local b = a*2
 print(fact(b + 3))
 local var3 = 3;
