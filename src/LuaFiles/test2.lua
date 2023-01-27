@@ -17,4 +17,4 @@ end
 local a = 1 local b = a*2
 print(fact(b + 3))
 local var3 = 3;
-print(var3)
+print(var)

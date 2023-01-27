@@ -5,13 +5,8 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+#include "elementKind.h"
 
-enum ElementKind {
-	NULKIND,
-	OPERATOR,
-	STR_LITERAL,
-	NUM_LITERAL,
-};
 
 struct Element : Structure {
 	enum ElementKind kind { NULKIND };

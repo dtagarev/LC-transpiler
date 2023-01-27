@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+/* #include "elementKind.h" */
 
 enum StructureType {
 	UNKNOWN, 
@@ -27,6 +28,9 @@ public:
 	Structure(StructureType type) : structureType(type) {}
 	virtual ~Structure() = default;
 	virtual void debugPrint(std::size_t indent) = 0;
+
+	/* virtual void translateElement(enum ElementKind which, std::string to) = 0; */
+	structureArray matchingReturnType;
 };
 
 #endif
