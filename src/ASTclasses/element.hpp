@@ -10,7 +10,7 @@ class AstVisitor;
 
 struct Element : Structure {
 	enum ElementKind kind { NULKIND };
-	enum Type returnType { NULLTYPE };
+	/* enum Type returnType { NULLTYPE }; */
 	std::string text;
 	
 	void accept(AstVisitor*) override;

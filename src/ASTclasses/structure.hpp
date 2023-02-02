@@ -24,6 +24,7 @@ public:
 	using structureArray = std::vector<Structure*>;
 	
 	enum StructureKind structureType { UNKNOWN };	
+	enum Type returnType { NULLTYPE };
 	bool locality = false;
 	
 	

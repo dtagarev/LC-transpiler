@@ -15,6 +15,7 @@
 #include "../ASTclasses/if.hpp"
 #include "../ASTclasses/while.hpp"
 #include "../ASTclasses/types.h"
+#include "find-retrun-type-operation.hpp"
 
 class Transformer {
 	//to-do
@@ -29,6 +30,7 @@ class Transformer {
 	structureArray globalDeclarations; //only function declarations and global variables
 	structureArray mainDeclaraions;
 	
+	FindRetrunTypeOp findRetrunType;
 	
 	void sortAst(structureArray ast);
 	void detFDeclReturnType();

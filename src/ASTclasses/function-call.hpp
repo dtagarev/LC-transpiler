@@ -13,7 +13,7 @@ struct FuncCall : Structure {
 private:	
 	void free();	
 public:	
-	enum Type returnType { NULLTYPE };
+	/* enum Type returnType { NULLTYPE }; */
 	std::string name;
 	std::vector<structureArray> parameters;
 	

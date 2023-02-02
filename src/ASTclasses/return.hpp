@@ -14,7 +14,7 @@ private:
 	void free();	
 public:	
 
-	enum Type returnType { NULLTYPE };
+	/* enum Type returnType { NULLTYPE }; */
 	structureArray toReturn;
 
 	void debugPrint(std::size_t indent) override;

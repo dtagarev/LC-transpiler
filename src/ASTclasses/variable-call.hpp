@@ -10,7 +10,7 @@ class AstVisitor;
 struct VariableCall : Structure {
 	using structureArray = Structure::structureArray;
 	
-	enum Type returnType { NULLTYPE };
+	/* enum Type returnType { NULLTYPE }; */
 	std::string name;
 	
 	void debugPrint(std::size_t indent) override;

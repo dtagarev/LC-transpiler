@@ -7,14 +7,14 @@
 
 int main ()
 {
-	FILE *fh = fopen("LuaFiles/test2.lua", "r");
-    if (!fh) { std::cerr << "Can't find file." << std::endl; }
-    fseek(fh, 0, SEEK_END);
-    size_t fileSize = ftell(fh);
-    fseek(fh, 0, SEEK_SET);
-	std::string fileContents(fileSize, ' ');
-	fread(fileContents.data(), 1, fileSize, fh);
-	fclose(fh);
+	/* FILE *fh = fopen("LuaFiles/test2.lua", "r"); */
+    /* if (!fh) { std::cerr << "Can't find file." << std::endl; } */
+    /* fseek(fh, 0, SEEK_END); */
+    /* size_t fileSize = ftell(fh); */
+    /* fseek(fh, 0, SEEK_SET); */
+	/* std::string fileContents(fileSize, ' '); */
+	/* fread(fileContents.data(), 1, fileSize, fh); */
+	/* fclose(fh); */
 	/* std::cout << fileContents << std::endl <<std:: endl; */
 	/* std::cout << "-----------------------------------" << std::endl << std::endl; */
     Lexer lx;
@@ -24,7 +24,7 @@ int main ()
 	
 	std::string testfile1 = "function fact (n) if n == 0 then  return 1  else  return n * fact(n-1.5)  end end local a = 1 local b = a*2 print(fact(b + 3)) ";
 	
-	std::vector<Token> tokens = lx.parse(fileContents);	
+	std::vector<Token> tokens = lx.parse(testfile1);	
 	auto ast = ps.parse(tokens);
 	
 	/* ps.debugPrint(ast); */
@@ -34,12 +34,11 @@ int main ()
 	
 	tr.transformAST(ast);
 	
-	/* tr.printInc(); */
-	/* tr.printGlobalGeclarations(); */
-	/* tr.printMainDeclarations(); */
+	tr.printInc();
+	tr.printGlobalGeclarations();
+	tr.printMainDeclarations();
 	
-	std::ofstream f("transpiledFile.cpp", std::ios::trunc);
-	gn.generateCPPCode(tr.getIncludes() , tr.getGlobalDeclaration() , tr.getMainDeclaration());
+	/* gn.generateCPPCode(tr.getIncludes() , tr.getGlobalDeclaration() , tr.getMainDeclaration()); */
 	ps.deleteAST(ast);
 }
 

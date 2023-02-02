@@ -1,9 +1,15 @@
 #ifndef FIND_RETURN_TYPE_OPERATION
 #define FIND_RETURN_TYPE_OPERATION
 #include "../ASTclasses/ast-visitor.h"
+#include "../ASTclasses/structure.hpp"
+#include "../ASTclasses/types.h"
 
-class findRetrunTypeOp : public AstVisitor {
-	
+class FindRetrunTypeOp : public AstVisitor {
+public:
+	using structureArray = Structure::structureArray;
+private:
+	Type determineTypeInsideBody(structureArray st);
+public:	
 	void visit(FunctionDeclaration*) override;
 	void visit(FuncCall* ) override;
 	void visit(VariableDeclaration* ) override;
@@ -12,6 +18,7 @@ class findRetrunTypeOp : public AstVisitor {
 	void visit(Element*) override;
 	void visit(If* ) override;
 	void visit(While*) override;
+
 };
 
 #endif

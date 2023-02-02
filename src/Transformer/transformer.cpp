@@ -16,6 +16,7 @@ const structureArray& Transformer::getMainDeclaration() {
 
 void Transformer::transformAST(structureArray ast) {
 	sortAst(ast);
+	detFDeclReturnType();
 }
 
 
@@ -30,6 +31,12 @@ void Transformer::sortAst(structureArray ast) {
 		} else {
 			mainDeclaraions.push_back(el);
 		}
+	}
+}
+void Transformer::detFDeclReturnType() {
+	for (auto el : globalDeclarations) {
+		if(el->reveal() == FUNC_DECL)
+			el->accept(&findRetrunType);
 	}
 }
 
