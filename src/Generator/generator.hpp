@@ -13,7 +13,7 @@ public:
 	using includes = Transformer::includes;	
 	
 private:
-	
+	void generateInsideBody(structureArray arr);
 	GenerateOp generateOperation;
 	/* std::ofstream openFile(const char* fileName); */	
 	/* void closeFile(std::ofstream& f); */

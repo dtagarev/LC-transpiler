@@ -34,6 +34,7 @@ class Transformer {
 	
 	void sortAst(structureArray ast);
 	void detFDeclReturnType();
+	void detVDeclReturnType();
 	
 public:
 	

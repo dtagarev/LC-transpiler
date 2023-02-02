@@ -3,15 +3,22 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "../ASTclasses/ast-visitor.h"
+#include"../ASTclasses/structure.hpp"
 
 class GenerateOp : public AstVisitor {
+public:
+	using structureArray = Structure::structureArray;
+private:
 	
-	/* std::ofstream openFile(const char* fileName); */	
-	/* void closeFile(std::ofstream& f); */
-	/* std::ofstream f; */	
+	const char* getTypeInStr(Structure* el);
+	void generateParametersFDecl(std::vector<structureArray> arr);
+	void generateParameters(std::vector<structureArray>);
+	void generateDeclaration(structureArray);
+	void generateBody(structureArray);
+	void generateElseBody(structureArray);
 public:	
-	/* GenerateOp(const char* filename); */
 	
 	void visit(FunctionDeclaration*) override;
 	void visit(FuncCall* ) override;

@@ -17,6 +17,8 @@ const structureArray& Transformer::getMainDeclaration() {
 void Transformer::transformAST(structureArray ast) {
 	sortAst(ast);
 	detFDeclReturnType();
+	detVDeclReturnType();
+	inc.push_back("#include <iostream>");
 }
 
 
@@ -33,11 +35,25 @@ void Transformer::sortAst(structureArray ast) {
 		}
 	}
 }
+
 void Transformer::detFDeclReturnType() {
 	for (auto el : globalDeclarations) {
 		if(el->reveal() == FUNC_DECL)
 			el->accept(&findRetrunType);
 	}
+}
+
+void Transformer::detVDeclReturnType() {
+	for (auto el : globalDeclarations) {
+		if(el->reveal() == VARIABLE_DECL)
+			el->accept(&findRetrunType);
+	}
+
+	for (auto el : mainDeclaraions) {
+		if(el->reveal() == VARIABLE_DECL)
+			el->accept(&findRetrunType);
+	}
+	
 }
 
 void Transformer::printInc() {
@@ -48,6 +64,7 @@ void Transformer::printInc() {
 	}
 	std::cout << std::endl;
 }
+
 void Transformer::printGlobalGeclarations() {
 	std::cout << "______ Global Declarations _______" << std::endl;
 	std::cout << std::endl;
@@ -56,6 +73,7 @@ void Transformer::printGlobalGeclarations() {
 	}
 	std::cout << std::endl;
 }
+
 void Transformer::printMainDeclarations() {
 	std::cout << "______ Main Declarations _______" << std::endl;
 	std::cout << std::endl;
