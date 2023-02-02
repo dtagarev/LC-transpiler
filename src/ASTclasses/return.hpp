@@ -5,6 +5,7 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+class AstVisitor;
 
 struct Return : Structure {
 	using structureArray = Structure::structureArray;
@@ -20,6 +21,9 @@ public:
 	Return();
 	Return(const Return&) = delete;
 	const Return& operator=(const Return&) = delete;
+	
+	void accept(AstVisitor*) override;		
+	
 	~Return();
 };
 

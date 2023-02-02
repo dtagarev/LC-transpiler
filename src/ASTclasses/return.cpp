@@ -1,4 +1,9 @@
 #include "return.hpp"
+#include "ast-visitor.h"
+
+void Return::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 void Return::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "Return(" << returnType << ")(" << structureType << "): " << std::endl;

@@ -6,6 +6,7 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+class AstVisitor;
 
 struct FuncCall : Structure {
 	using structureArray = Structure::structureArray;
@@ -20,6 +21,9 @@ public:
 	FuncCall();
 	FuncCall(const FuncCall&) = delete;
 	const FuncCall& operator=(const FuncCall&) = delete;
+	
+	void accept(AstVisitor*) override;
+	
 	~FuncCall();
 };
 

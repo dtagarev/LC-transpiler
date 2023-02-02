@@ -1,4 +1,9 @@
 #include "if.hpp"
+#include "ast-visitor.h"
+
+void If::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 void If::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "IF(-)(" << structureType << "): " << std::endl;

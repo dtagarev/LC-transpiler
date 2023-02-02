@@ -1,5 +1,11 @@
 #include "function-call.hpp"
 #include <cstddef>
+#include "ast-visitor.h"
+
+void FuncCall::accept(AstVisitor* v) {
+	v->visit(this);
+}
+
 
 void FuncCall::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "Function Call(" << returnType << ")(" << structureType << "): " << name << std::endl;

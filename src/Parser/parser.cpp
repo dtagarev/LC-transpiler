@@ -22,7 +22,11 @@ structureArray Parser::parse(tokenArray& tokens) {
 
 		} else if (currToken->type == IDENTIFIER ){ //covers - VariableCall, FuncCall, VariableDeclaration, tableCall, tableDecl
 			Structure* curr = parseID(currToken); //currToken moved inide function
-			curr->locality = local;
+			if(curr->reveal() == FUNC_CALL) {
+				curr->locality = true;
+			} else
+				curr->locality = local;
+			
 			res.push_back(curr);
 
 		} else if (currToken->type ==  IF){

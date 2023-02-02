@@ -5,6 +5,7 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+class AstVisitor;
 
 struct VariableCall : Structure {
 	using structureArray = Structure::structureArray;
@@ -13,6 +14,9 @@ struct VariableCall : Structure {
 	std::string name;
 	
 	void debugPrint(std::size_t indent) override;
+	
+	void accept(AstVisitor*) override;		
+	
 	VariableCall();
 };
 

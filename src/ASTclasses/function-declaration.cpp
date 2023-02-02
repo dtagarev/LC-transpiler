@@ -1,5 +1,10 @@
 #include "function-declaration.hpp"
 #include "structure.hpp"
+#include "ast-visitor.h"
+
+void FunctionDeclaration::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 void FunctionDeclaration::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "Function Declaration(" << returnType << ")(" << structureType << "): " << name << std::endl;

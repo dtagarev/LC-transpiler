@@ -6,6 +6,7 @@
 #include <vector>
 #include "types.h"
 #include "structure.hpp"
+class AstVisitor;
 
 struct FunctionDeclaration : Structure {
 	using structureArray = Structure::structureArray;
@@ -25,6 +26,9 @@ public:
 	FunctionDeclaration();
 	FunctionDeclaration(const FunctionDeclaration&) = delete;
 	const FunctionDeclaration& operator=(const FunctionDeclaration&) = delete;
+	
+	void accept(AstVisitor*) override;	
+	
 	~FunctionDeclaration();
 };
 

@@ -1,4 +1,9 @@
 #include "while.hpp"
+#include "ast-visitor.h"
+
+void While::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 void While::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "While(-)(" << structureType << "): " << std::endl;

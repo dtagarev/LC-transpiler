@@ -3,9 +3,10 @@
 
 #include <vector>
 #include <iostream>
-/* #include "elementKind.h" */
+#include "types.h"
+class AstVisitor;
 
-enum StructureType {
+enum StructureKind {
 	UNKNOWN, 
 	VARIABLE_DECL,
 	VARIABLE_CALL,
@@ -22,15 +23,17 @@ class Structure {
 public:
 	using structureArray = std::vector<Structure*>;
 	
-	enum StructureType structureType { UNKNOWN };	
+	enum StructureKind structureType { UNKNOWN };	
 	bool locality = false;
 	
-	Structure(StructureType type) : structureType(type) {}
+	
+	Structure(StructureKind type) : structureType(type) {}
 	virtual ~Structure() = default;
 	virtual void debugPrint(std::size_t indent) = 0;
 	
-	/* virtual void translateElement(enum ElementKind which, std::string to) = 0; */
-	StructureType reveal() { return structureType; };
+	virtual void accept(class AstVisitor*) = 0;
+	
+	StructureKind reveal() { return structureType; };
 };
 
 #endif

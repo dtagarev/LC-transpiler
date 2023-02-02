@@ -1,5 +1,10 @@
 #include "variable-call.hpp"
 #include "structure.hpp"
+#include "ast-visitor.h"
+
+void VariableCall::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 
 

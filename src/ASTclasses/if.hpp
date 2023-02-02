@@ -5,6 +5,7 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+class AstVisitor;
 
 struct If : Structure {
 	using structureArray = Structure::structureArray;
@@ -21,6 +22,9 @@ public:
 	
 	If(const If&) = delete;
 	const If& operator=(const If&) = delete;
+	
+	void accept(AstVisitor*) override;		
+	
 	~If();
 };
 

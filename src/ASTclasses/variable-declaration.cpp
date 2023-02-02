@@ -1,5 +1,10 @@
 #include "variable-declaration.hpp"
 #include "structure.hpp"
+#include "ast-visitor.h"
+
+void VariableDeclaration::accept(AstVisitor* v) {
+	v->visit(this);
+}
 
 void VariableDeclaration::debugPrint(std::size_t indent) {
 	std::cout << std::string(indent, '\t') << "Variable_Declaration(" << returnType << ")(" << structureType << "): " << name << std::endl;

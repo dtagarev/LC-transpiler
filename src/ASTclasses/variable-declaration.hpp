@@ -5,6 +5,7 @@
 #include <string>
 #include "structure.hpp"
 #include "types.h"
+class AstVisitor;
 
 struct VariableDeclaration : Structure {
 	using structureArray = Structure::structureArray;
@@ -22,6 +23,9 @@ public:
 	VariableDeclaration();
 	VariableDeclaration(const VariableDeclaration&) = delete;
 	const VariableDeclaration& operator=(const VariableDeclaration&) = delete;
+	
+	void accept(AstVisitor*) override;		
+	
 	~VariableDeclaration();
 };
 
