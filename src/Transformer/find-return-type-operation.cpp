@@ -8,13 +8,15 @@ Type FindRetrunTypeOp::determineTypeInsideBody(structureArray st)  {
 	for (Structure* el : st) {
 		if(el->reveal() == RETURN_CALL) {
 			toReturn = DOUBLE;
-		} else if(el->reveal() == IF_SCTRUCT || el->reveal() == WHILE_STRUCT) {
-			el->accept(this);
+		} 
+		
+		el->accept(this);
+		
+		if(el->reveal() == IF_SCTRUCT || el->reveal() == WHILE_STRUCT) {
 			if(el->returnType != VOID) {
-				toReturn == el->returnType;
+				toReturn = el->returnType;
 			}
 		}
-		el->accept(this);
 	}
 	return toReturn;
 }

@@ -45,6 +45,9 @@ void GenerateOp::generateParametersFDecl(std::vector<structureArray> arr) {
 		std::cout << ',';
 	}	
 	for (auto el : arr[length - 1]) {
+		if(el->reveal() == VARIABLE_CALL) {
+			std::cout << "double ";
+		}
 		el->accept(this);
 	}
 	std::cout << ')';

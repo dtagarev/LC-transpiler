@@ -43,5 +43,7 @@ int main ()
 	ps.deleteAST(ast);
 }
 
-//to-do - determine how to access structures data and where to generate code; in the astClasses or in the generator
-// last time was defining functions inside Structures
+//to-do - test with lots of else if and while
+//get special functions to be generated inside C++ (like print)
+//make transpliper that holds everything in main
+//make for-structure
