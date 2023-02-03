@@ -68,13 +68,20 @@ void GenerateOp::generateBody(structureArray arr) {
 void GenerateOp::generateElseBody(structureArray arr) {
 	std::cout << std::endl << "}\n";
 	std::cout << "else ";
-	if(arr[0]->reveal() == IF_SCTRUCT) {
-		arr[0]->accept(this);
-	}
-	else {
+	/* if(arr[0]->reveal() == IF_SCTRUCT) { */
+	/* 	arr[0]->accept(this); */
+	/* } */
+	/* else { */
 		std::cout << "{\n";
 		generateBody(arr);
-	}
+	/* } */
+}
+
+void GenerateOp::generateElseIf(std::vector<structureArray> parameters, structureArray body) {
+	std::cout << "}\nelse if ";
+	generateParameters(parameters);
+	std:: cout << " {\n";
+	generateBody(body);
 }
 
 void GenerateOp::visit(FunctionDeclaration* m) {
@@ -109,9 +116,20 @@ void GenerateOp::visit(If* m) {
 	generateParameters(m->parameters);
 	std::cout  << '{' << std::endl;
 	generateBody(m->body);
+	size_t length = m->elseIfBody.size();
+	for (size_t i = 0; i < length; i++) {
+		
+		if(!m->elseIfBody[i].empty()) {
+			generateElseIf(m->elseIfParameters[i], m->elseIfBody[i]);
+		} else {
+			break;
+		}
+	}
+	
 	if(!m->elseBody.empty()) {
 		generateElseBody(m->elseBody);
 	}
+	
 	std::cout  << std::endl << '}' << std::endl;
 
 }

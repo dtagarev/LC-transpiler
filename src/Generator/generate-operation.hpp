@@ -18,6 +18,7 @@ private:
 	void generateDeclaration(structureArray);
 	void generateBody(structureArray);
 	void generateElseBody(structureArray);
+	void generateElseIf(std::vector<structureArray> parameters, structureArray body);
 public:	
 	
 	void visit(FunctionDeclaration*) override;

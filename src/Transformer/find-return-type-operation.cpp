@@ -40,6 +40,18 @@ void FindRetrunTypeOp::visit(Element* m) {
 }
 void FindRetrunTypeOp::visit(If* m) {
 	m->returnType = determineTypeInsideBody(m->body);
+	if(m->returnType == VOID) {
+		for (auto el : m->elseIfBody) {
+			if(m->returnType == VOID) {
+				m->returnType = determineTypeInsideBody(el);
+			} else { 
+				break; 
+			}
+		}
+	}
+	if(m->returnType == VOID) {	
+		m->returnType = determineTypeInsideBody(m->body);
+	}
 }
 void FindRetrunTypeOp::visit(While* m) {
 	m->returnType = determineTypeInsideBody(m->body);

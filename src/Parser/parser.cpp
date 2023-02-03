@@ -116,12 +116,22 @@ Structure* Parser::expectIf(tokenArray::iterator& currToken) {
 	std::vector<enum TokenType> endBody;
 	endBody.push_back(END);
 	endBody.push_back(ELSE);
+	endBody.push_back(ELSEIF);
 	newIf->body = parseBody(currToken, endBody);
 	currToken--;
+	while (currToken->type == ELSEIF) {
+		currToken++;
+		newIf->elseIfParameters.push_back(parseParameters(currToken, endParam));
+		newIf->elseIfBody.push_back(parseBody(currToken, endBody));
+		currToken--;
+	}
+	
 	if (currToken->type == ELSE) {
 		currToken++;
 		newIf ->elseBody = parseBody(currToken, endBody);
-	}
+	} else 
+		currToken++;
+	
 	return newIf;
 }
 
@@ -163,6 +173,7 @@ std::vector<structureArray> Parser::parseParameters(tokenArray::iterator& currTo
 		if(currToken->type == COMMA) {
 			arr.push_back(curr);
 			curr.clear();
+			currToken++;
 
 		} else if(currToken->type == IDENTIFIER) {
 			curr.push_back(parseID(currToken)); //currToken moved inside

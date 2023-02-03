@@ -15,9 +15,12 @@ private:
 public:	
 	std::vector<structureArray> parameters;
 	structureArray body;
+	std::vector<std::vector<structureArray>> elseIfParameters;
+	std::vector<structureArray> elseIfBody;
+	
 	structureArray elseBody;
 
-	void debugPrint(std::size_t indent) override;
+	void debugPrint(std::size_t indent) override; //chech if correct
 	If();
 	
 	If(const If&) = delete;

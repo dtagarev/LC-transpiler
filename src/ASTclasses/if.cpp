@@ -17,10 +17,25 @@ void If::debugPrint(std::size_t indent) {
 	for (auto el : body) {
 		el->debugPrint(indent + 1);	
 	}
+	
+	size_t length = elseIfBody.size();
+	for (size_t i = 0; i < length; i++) {
+		std::cout << std::string(indent, '\t') << "ElseIfBody" << std::endl;
+		std::cout << std::string(indent, '\t') << " Parameters: " << std::endl;
+		for (auto el : elseIfParameters[i]) {
+			for( auto elll : el) {
+				elll->debugPrint(indent + 1);	
+			}
+		}
+		std::cout << std::string(indent, '\t') << "Body: " << std::endl;
+		for (auto el : elseIfBody[i]) {
+			el->debugPrint(indent + 1);	
+		}
+	}
 	std::cout << std::string(indent, '\t') << "elseBody: " << std::endl;
-	std::cout << std::string(indent, '\t') << " Parameters: " << std::endl;
+	std::cout << std::string(indent, '\t') << " Body: " << std::endl;
 	for (auto el : elseBody) {
-		el->debugPrint(indent + 2);	
+		el->debugPrint(indent + 1);	
 	}
 }
 
