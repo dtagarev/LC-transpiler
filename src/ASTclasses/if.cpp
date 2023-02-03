@@ -55,6 +55,20 @@ void If::free() {
 	for (auto el : elseBody) {
 		delete el;	
 	}
+	
+	for (auto el : elseIfParameters) {
+		for (auto ell : el) {
+			for(auto el3 : ell) {
+				delete el3;	
+			}
+		}	
+	}
+	
+	for (auto el : elseIfBody) {
+		for (auto ell : el) {
+				delete ell;
+		}	
+	}
 }
 If::If() : Structure(IF_SCTRUCT) {}
 If::~If() {

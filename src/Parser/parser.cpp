@@ -126,6 +126,8 @@ Structure* Parser::expectIf(tokenArray::iterator& currToken) {
 		currToken--;
 	}
 	
+	/* currToken--; */
+	
 	if (currToken->type == ELSE) {
 		currToken++;
 		newIf ->elseBody = parseBody(currToken, endBody);
@@ -250,7 +252,9 @@ structureArray Parser::parseBody(tokenArray::iterator& currToken, std::vector<en
 		} else if(currToken->type == IF) { 
 			Structure* newIf = expectIf(currToken);
 			body.push_back(newIf);
-
+		} else if(currToken->type == WHILE) {
+			Structure* newWhile = expectWhile(currToken);
+			body.push_back(newWhile);
 		} else if(currToken->type == RETURN) { // to-do -> elem?, while
 			Structure* newReturn = expectReturn(currToken);
 			body.push_back(newReturn);

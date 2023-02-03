@@ -116,13 +116,16 @@ void GenerateOp::visit(If* m) {
 	generateParameters(m->parameters);
 	std::cout  << '{' << std::endl;
 	generateBody(m->body);
-	size_t length = m->elseIfBody.size();
-	for (size_t i = 0; i < length; i++) {
+	if(!m->elseIfBody.empty()) {
+		size_t length = m->elseIfBody.size();
 		
-		if(!m->elseIfBody[i].empty()) {
-			generateElseIf(m->elseIfParameters[i], m->elseIfBody[i]);
-		} else {
-			break;
+		for (size_t i = 0; i < length; i++) {
+			
+			if(!m->elseIfBody[i].empty()) {
+				generateElseIf(m->elseIfParameters[i], m->elseIfBody[i]);
+			} else {
+				break;
+			}
 		}
 	}
 	

@@ -50,7 +50,7 @@ void FindRetrunTypeOp::visit(If* m) {
 		}
 	}
 	if(m->returnType == VOID) {	
-		m->returnType = determineTypeInsideBody(m->body);
+		m->returnType = determineTypeInsideBody(m->elseBody);
 	}
 }
 void FindRetrunTypeOp::visit(While* m) {
