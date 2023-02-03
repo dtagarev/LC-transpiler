@@ -1,7 +1,8 @@
 # LC-transpiler
 A basic lua to c++ transpliler
 
-##Currently supported
+## Currently supported
+
 ### Types
 - int
 ### Lua functionality
@@ -9,7 +10,8 @@ A basic lua to c++ transpliler
 - variables
 - if-elseif-else statemens
 - while loops
-###Tokens
+
+### Tokens
 
 - TokPlus	
 - TokMinus	
@@ -17,7 +19,6 @@ A basic lua to c++ transpliler
 - TokSlash	
 - TokPercent	
 - TokExp	
-- TokSh	
 - TokEqual	
 - TokNotequal	
 - TokLEq	
