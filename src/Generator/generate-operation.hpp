@@ -19,6 +19,9 @@ private:
 	void generateBody(structureArray);
 	void generateElseBody(structureArray);
 	void generateElseIf(std::vector<structureArray> parameters, structureArray body);
+	
+	bool generateSpecialFunctionCall(FuncCall* );
+	void generateSpecialFuncionParameters(std::vector<structureArray>);
 public:	
 	
 	void visit(FunctionDeclaration*) override;
@@ -29,8 +32,7 @@ public:
 	void visit(Element*) override;
 	void visit(If* ) override;
 	void visit(While*) override;
-
-	/* ~GenerateOp(); */
+	
 };
 
 #endif

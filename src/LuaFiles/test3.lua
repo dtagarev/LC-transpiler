@@ -14,12 +14,11 @@ function g(n,m,l)
 		return 3
 	elseif l == 100 then
 		return 100
-	else
-		return 10
 	end
-
+	
 	while var == 8 do
 		var = var + 1;
+		break;
 	end
 
 	return var

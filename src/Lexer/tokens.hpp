@@ -69,10 +69,7 @@ enum TokenType {
 	TRUE,
 	UNTIL,
 	WHILE,
-	//base library tokens
-	//more on the site
 	//comments?
-	PRINT, 
 	EOF_TOKEN, //62
 };
 

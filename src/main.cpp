@@ -1,5 +1,4 @@
 #include <iostream>
-/* #include <stdio.h> */
 #include "Lexer/lexer.hpp"
 #include "Parser/parser.hpp"
 #include "Transformer/transformer.hpp"
@@ -7,14 +6,14 @@
 
 int main ()
 {
-	/* FILE *fh = fopen("LuaFiles/test2.lua", "r"); */
-    /* if (!fh) { std::cerr << "Can't find file." << std::endl; } */
-    /* fseek(fh, 0, SEEK_END); */
-    /* size_t fileSize = ftell(fh); */
-    /* fseek(fh, 0, SEEK_SET); */
-	/* std::string fileContents(fileSize, ' '); */
-	/* fread(fileContents.data(), 1, fileSize, fh); */
-	/* fclose(fh); */
+	FILE *fh = fopen("LuaFiles/test2.lua", "r");
+    if (!fh) { std::cerr << "Can't find file." << std::endl; }
+    fseek(fh, 0, SEEK_END);
+    size_t fileSize = ftell(fh);
+    fseek(fh, 0, SEEK_SET);
+	std::string fileContents(fileSize, ' ');
+	fread(fileContents.data(), 1, fileSize, fh);
+	fclose(fh);
 	
 	/* std::cout << fileContents << std::endl <<std:: endl; */
 	
@@ -49,7 +48,7 @@ int main ()
 	ps.deleteAST(ast);
 }
 
-//to-do - test with lots of else if and while ( test if return in transformer is picked up inside else if and else - YES
-//get special functions to be generated inside C++ (like print)
+//add break inside while loop
+//add one line comments support
 //make transpliper that holds everything in main
 //make for-structure

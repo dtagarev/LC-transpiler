@@ -16,7 +16,8 @@ const char* GenerateOp::getTypeInStr(Structure* el) {
 			throw std::runtime_error("Error, tried to generate invalid type");
 
 	}
-}
+}	
+
 void GenerateOp::generateParameters(std::vector<structureArray> arr) {
 		std::cout << '(';
 	size_t length = arr.size();
@@ -84,6 +85,23 @@ void GenerateOp::generateElseIf(std::vector<structureArray> parameters, structur
 	generateBody(body);
 }
 
+bool GenerateOp::generateSpecialFunctionCall(FuncCall* m) {
+	if(m->name == "print") {
+		std::cout << "std::cout << ";
+		generateSpecialFuncionParameters(m->parameters);
+		return true;
+	}
+	return false;
+}
+void GenerateOp::generateSpecialFuncionParameters(std::vector<structureArray> par) {
+	size_t length = par.size();
+	for (size_t i = 0; i < length; i++) {
+		for (auto el : par[i]) {
+			el->accept(this);
+		}
+	}	
+}
+
 void GenerateOp::visit(FunctionDeclaration* m) {
 	std::cout << getTypeInStr(m) << ' ' << m->name;
 	generateParametersFDecl(m->parameters); 
@@ -92,8 +110,10 @@ void GenerateOp::visit(FunctionDeclaration* m) {
 	std::cout  << std::endl << '}' << std::endl;
 }
 void GenerateOp::visit(FuncCall* m) {
-	std::cout  << m->name << ' ';
-	generateParameters(m->parameters);
+	if(!generateSpecialFunctionCall(m)) {
+		std::cout  << m->name << ' ';
+		generateParameters(m->parameters);
+	}
 }
 void GenerateOp::visit(VariableDeclaration* m) {
 	std::cout  << getTypeInStr(m) << ' ' << m->name  << " = ";
