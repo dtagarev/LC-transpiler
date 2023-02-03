@@ -8,7 +8,7 @@ A basic lua to c++ transpliler
 ### Lua functionality
 - functions
 - variables
-- if-elseif-else statemens
+- if-elseif-else structures
 - while loops
 
 ### Tokens
