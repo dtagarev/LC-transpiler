@@ -15,11 +15,8 @@ public:
 private:
 	void generateInsideBody(structureArray arr);
 	GenerateOp generateOperation;
-	/* std::ofstream openFile(const char* fileName); */	
-	/* void closeFile(std::ofstream& f); */
+
 public:	
-	/* Generator(const char* filename); */
-	
 	void generateCPPCode(includes inc, structureArray globDeclarations, structureArray mainDeclarations);
 };
 #endif

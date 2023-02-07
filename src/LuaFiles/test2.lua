@@ -28,8 +28,6 @@ end
 
 local locVar2 = 34;
 
-fact(n)
-
 globVar1 = 3;
 
 GLOBVAR2 = 3;
@@ -38,4 +36,5 @@ while locVar2 == 1 do
 	print(locVar2);
 end
 local a = 1 local b = a*2
-print(fact(b + 3))
+
+fact(2)
