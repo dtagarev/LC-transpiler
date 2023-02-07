@@ -160,6 +160,14 @@ Structure* Parser::expectReturn(tokenArray::iterator& currToken) {
 	return newReturn;
 }
 
+Structure* Parser::expectBreak(tokenArray::iterator& currToken) {
+	Break* newBreak = new Break();
+	if(currToken->type != BREAK)
+		throw std::runtime_error("Invalid token. Token must be break");
+	currToken++;
+	return newBreak;
+}
+
 std::vector<structureArray> Parser::parseParameters(tokenArray::iterator& currToken, std::vector<enum TokenType> endBody) {
 	std::vector<structureArray> arr;
 	structureArray curr; 
@@ -258,6 +266,10 @@ structureArray Parser::parseBody(tokenArray::iterator& currToken, std::vector<en
 		} else if(currToken->type == RETURN) { // to-do -> elem?, while
 			Structure* newReturn = expectReturn(currToken);
 			body.push_back(newReturn);
+
+		} else if(currToken->type == BREAK) { // to-do -> elem?, while
+			Structure* newBreak = expectBreak(currToken);
+			body.push_back(newBreak);
 			
 		} else if(currToken->type == LOCAL) { 
 			currToken++;

@@ -18,6 +18,7 @@ public:
 	void visit(Element*) override;
 	void visit(If* ) override;
 	void visit(While*) override;
+	void visit(Break*) override;
 
 };
 

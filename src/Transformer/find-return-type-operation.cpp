@@ -56,3 +56,7 @@ void FindRetrunTypeOp::visit(If* m) {
 void FindRetrunTypeOp::visit(While* m) {
 	m->returnType = determineTypeInsideBody(m->body);
 }
+
+void FindRetrunTypeOp::visit(Break*) {
+	return;
+}

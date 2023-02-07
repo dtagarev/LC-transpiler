@@ -17,6 +17,7 @@ enum StructureKind {
 	ELEMENT, 
 	IF_SCTRUCT,
 	WHILE_STRUCT,
+	BREAK_CALL,
 };
 
 class Structure {

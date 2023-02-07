@@ -9,6 +9,7 @@
 #include "../ASTclasses/element.hpp"
 #include "../ASTclasses/if.hpp"
 #include "../ASTclasses/while.hpp"
+#include "../ASTclasses/break.hpp"
 
 class AstVisitor {
 public:
@@ -21,6 +22,7 @@ public:
 	virtual void visit(Element*) = 0;
 	virtual void visit(If* ) = 0;
 	virtual void visit(While*) = 0;
+	virtual void visit(Break*) = 0;
 };
 
 #endif

@@ -51,4 +51,3 @@ A basic lua to c++ transpliler
 - TokWhile	
 - TokIdent	
 - TokWhiteSpace	
-- TokComment	

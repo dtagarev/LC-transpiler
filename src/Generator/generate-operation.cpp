@@ -164,3 +164,6 @@ void GenerateOp::visit(While* m) {
 	std::cout << std::endl << "}" << std::endl;
 }
 
+void GenerateOp::visit(Break* m) {
+	std::cout  << "break;" << std::endl;
+}

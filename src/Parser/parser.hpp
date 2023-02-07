@@ -16,6 +16,7 @@
 #include "../ASTclasses/element.hpp"
 #include "../ASTclasses/if.hpp"
 #include "../ASTclasses/while.hpp"
+#include "../ASTclasses/break.hpp"
 #include "../ASTclasses/types.h"
 
 
@@ -39,6 +40,7 @@ private:
 	//to-be continued...
 	Structure* expectTable(tokenArray::iterator& currToken);
 	Structure* expectReturn(tokenArray::iterator& currToken);
+	Structure* expectBreak(tokenArray::iterator& currToken);
 	
 	Structure* parseID(tokenArray::iterator& currToken);
 	std::vector<structureArray> parseParameters(tokenArray::iterator& currToken, std::vector<enum TokenType> endBody = std::vector<enum TokenType>());
