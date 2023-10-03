@@ -4,5 +4,5 @@
 int main ()
 {
 	Transpiler transp;
-	transp.transpile("LuaFiles/test2.lua");
+	transp.transpile("LuaFiles/test1.lua");
 }
